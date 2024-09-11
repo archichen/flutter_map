@@ -45,9 +45,13 @@ base class PolylineLayer<R extends Object>
   /// Defaults to 10.
   final double minimumHitbox;
 
+  // Global key for CustomPaint
+  final GlobalKey paintKey;
+
   /// Create a new [PolylineLayer] to use as child inside [FlutterMap.children].
   const PolylineLayer({
     super.key,
+    required this.paintKey,
     required this.polylines,
     this.cullingMargin = 10,
     this.hitNotifier,
@@ -105,6 +109,7 @@ class _PolylineLayerState<R extends Object> extends State<PolylineLayer<R>>
 
     return MobileLayerTransformer(
       child: CustomPaint(
+        key: widget.paintKey,
         painter: _PolylinePainter(
           polylines: culled,
           camera: camera,
